@@ -118,31 +118,70 @@ exports.resolvers = {
 
 
 exports.services = {
-	/**
-	 * Provides ID of configuration given solely in resulting XML configuration
-	 * file.
-	 *
-	 * @type {string}
-	 */
-
-	emailProviderId: 'your-provider-id-here',
-
 
 	/**
-	 * Provides full name of mail service provider.
+	 * Provides common settings of all services configured below but specific to
+	 * Mozilla-style clients (Thunderbird).
 	 *
-	 * @type {string}
+	 * @see https://developer.mozilla.org/en-US/docs/Mozilla/Thunderbird/Autoconfiguration/FileFormat/HowTo
 	 */
 
-	displayName: 'your-full-isp-label-here',
+	mozilla: {
+		/**
+		 * Provides ID of configuration given solely in resulting XML configuration
+		 * file.
+		 *
+		 * @type {string}
+		 */
+
+		emailProviderId: 'your-provider-id-here',
+
+
+		/**
+		 * Provides full name of mail service provider.
+		 *
+		 * @type {string}
+		 */
+
+		displayName: 'your-full-isp-label-here',
+
+		/**
+		 * Provides some shorter name of mail service provider.
+		 *
+		 * @type {string}
+		 */
+
+		displayShortName: 'your-short-isp-label-here',
+	},
+
 
 	/**
-	 * Provides some shorter name of mail service provider.
+	 * Provides common settings of all services configured below but specific to
+	 * MS-style clients (Outlook).
 	 *
-	 * @type {string}
+	 * @see http://msdn.microsoft.com/en-us/library/aa581522%28v=exchg.80%29.aspx
 	 */
 
-	displayShortName: 'your-short-isp-label-here',
+	ms: {
+		/**
+		 * Provides "path" (URL?) of image used for branding this account
+		 * configuration.
+		 *
+		 * @see http://msdn.microsoft.com/en-us/library/bb204243%28v=exchg.80%29.aspx
+		 * @type {?string}
+		 */
+
+		imageUrl: null,
+
+		/**
+		 * Provides URL of ISP's home page.
+		 *
+		 * @see http://msdn.microsoft.com/en-us/library/bb204270%28v=exchg.80%29.aspx
+		 * @type {?string}
+		 */
+
+		serviceHomeUrl: null
+	},
 
 
 	/*
@@ -166,7 +205,7 @@ exports.services = {
 	/**
 	 * Provides basic configuration for service considered offering secure IMAP.
 	 *
-	 * @type {{disabled:boolean=, hostname:string, port:int, socketType:string, authentication:string}}
+	 * @type {{disabled:boolean=, hostname:string, port:int, socketType:string, authentication:string, ms:{}=, mozilla:{}=}}
 	 */
 
 	imaps: {
@@ -174,7 +213,12 @@ exports.services = {
 		hostname: 'your.imaps.fqdn.here',
 		port: 993,
 		socketType: 'SSL',
-		authentication: 'password-cleartext'    // might be "password-encrypted"
+		ms: {
+			spa: false                          // set true for enabling SPA
+		},
+		mozilla: {
+			authentication: 'password-cleartext'// might be "password-encrypted" (default if omitted)
+		}
 	},
 
 	/**
@@ -184,7 +228,7 @@ exports.services = {
 	 * @note Mentioning "non-secure" above isn't requiring to actually configure
 	 *       non-secure service. Configuring another secure IMAP service is fine.
 	 *
-	 * @type {{disabled:boolean=, hostname:string, port:int, socketType:string, authentication:string}}
+	 * @type {{disabled:boolean=, hostname:string, port:int, socketType:string, authentication:string, ms:{}=, mozilla:{}=}}
 	 */
 
 	imap: {
@@ -192,13 +236,18 @@ exports.services = {
 		hostname: 'your.imap.fqdn.here',
 		port: 143,
 		socketType: 'STARTTLS',                 // might be "plain"
-		authentication: 'password-cleartext'    // might be "password-encrypted"
+		ms: {
+			spa: false                          // set true for enabling SPA
+		},
+		mozilla: {
+			authentication: 'password-cleartext'// might be "password-encrypted" (default if omitted)
+		}
 	},
 
 	/**
 	 * Provides basic configuration for service considered offering secure POP3.
 	 *
-	 * @type {{disabled:boolean=, hostname:string, port:int, socketType:string, authentication:string}}
+	 * @type {{disabled:boolean=, hostname:string, port:int, socketType:string, authentication:string, ms:{}=, mozilla:{}=}}
 	 */
 
 	pop3s: {
@@ -206,7 +255,12 @@ exports.services = {
 		hostname: 'your.pop3s.fqdn.here',
 		port: 995,
 		socketType: 'SSL',
-		authentication: 'password-cleartext'    // might be "password-encrypted"
+		ms: {
+			spa: false                          // set true for enabling SPA
+		},
+		mozilla: {
+			authentication: 'password-cleartext'// might be "password-encrypted" (default if omitted)
+		}
 	},
 
 	/**
@@ -216,7 +270,7 @@ exports.services = {
 	 * @note Mentioning "non-secure" above isn't requiring to actually configure
 	 *       non-secure service. Configuring another secure POP3 service is fine.
 	 *
-	 * @type {{disabled:boolean=, hostname:string, port:int, socketType:string, authentication:string}}
+	 * @type {{disabled:boolean=, hostname:string, port:int, socketType:string, authentication:string, ms:{}=, mozilla:{}=}}
 	 */
 
 	pop3: {
@@ -224,13 +278,18 @@ exports.services = {
 		hostname: 'your.pop3.fqdn.here',
 		port: 110,
 		socketType: 'STARTTLS',                 // might be "plain"
-		authentication: 'password-cleartext'    // might be "password-encrypted"
+		ms: {
+			spa: false                          // set true for enabling SPA
+		},
+		mozilla: {
+			authentication: 'password-cleartext'// might be "password-encrypted" (default if omitted)
+		}
 	},
 
 	/**
 	 * Provides basic configuration for service considered offering secure SMTP.
 	 *
-	 * @type {{disabled:boolean=, hostname:string, port:int, socketType:string, authentication:string}}
+	 * @type {{disabled:boolean=, hostname:string, port:int, socketType:string, authentication:string, ms:{}=, mozilla:{}=}}
 	 */
 
 	smtps: {
@@ -238,7 +297,12 @@ exports.services = {
 		hostname: 'your.smtps.fqdn.here',
 		port: 465,
 		socketType: 'SSL',
-		authentication: 'password-cleartext'    // might be "password-encrypted"
+		ms: {
+			spa: false                          // set true for enabling SPA
+		},
+		mozilla: {
+			authentication: 'password-cleartext'// might be "password-encrypted" (default if omitted)
+		}
 	},
 
 	/**
@@ -248,7 +312,7 @@ exports.services = {
 	 * @note Mentioning "non-secure" above isn't requiring to actually configure
 	 *       non-secure service. Configuring another secure SMTP service is fine.
 	 *
-	 * @type {{disabled:boolean=, hostname:string, port:int, socketType:string, authentication:string}}
+	 * @type {{disabled:boolean=, hostname:string, port:int, socketType:string, authentication:string, ms:{}=, mozilla:{}=}}
 	 */
 
 	smtp: {
@@ -256,6 +320,11 @@ exports.services = {
 		hostname: 'your.smtp.fqdn.here',
 		port: 25,
 		socketType: 'STARTTLS',                 // might be "plain"
-		authentication: 'password-cleartext'    // might be "password-encrypted"
+		ms: {
+			spa: false                          // set true for enabling SPA
+		},
+		mozilla: {
+			authentication: 'password-cleartext'// might be "password-encrypted" (default if omitted)
+		}
 	}
 };
