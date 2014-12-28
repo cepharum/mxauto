@@ -1,0 +1,25 @@
+body {
+	padding: 0;
+	margin: 0;
+	font: normal 16px/28px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+h1 {
+	margin: 0;
+	background: #005d91;
+	color: white;
+	font: bold 32px/100px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+h1 span {
+	display: block;
+	width: 920px;
+	margin: auto;
+	padding: 0 20px;
+}
+
+p {
+	width: 920px;
+	margin: 1em auto;
+	padding: 0 20px;
+}
