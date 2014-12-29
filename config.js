@@ -134,8 +134,15 @@ exports.services = {
 		 * @type {string}
 		 */
 
-		emailProviderId: 'your-provider-id-here',
+		emailProviderId: "your-provider-id-here",
 
+		/**
+		 * Defines domain(s) to list on responding to Mozilla client.
+		 *
+		 * @type {string|Array.<string>}
+		 */
+
+		domain: "your.isp.fqdn.here",
 
 		/**
 		 * Provides full name of mail service provider.
@@ -143,7 +150,7 @@ exports.services = {
 		 * @type {string}
 		 */
 
-		displayName: 'your-full-isp-label-here',
+		displayName: "your-full-isp-label-here",
 
 		/**
 		 * Provides some shorter name of mail service provider.
@@ -151,7 +158,7 @@ exports.services = {
 		 * @type {string}
 		 */
 
-		displayShortName: 'your-short-isp-label-here',
+		displayShortName: "your-short-isp-label-here"
 	},
 
 
@@ -210,14 +217,14 @@ exports.services = {
 
 	imaps: {
 		disabled: false,                        // this property is optional
-		hostname: 'your.imaps.fqdn.here',
+		hostname: "your.imaps.fqdn.here",
 		port: 993,
-		socketType: 'SSL',
+		socketType: "SSL",
 		ms: {
 			spa: false                          // set true for enabling SPA
 		},
 		mozilla: {
-			authentication: 'password-cleartext'// might be "password-encrypted" (default if omitted)
+			authentication: "password-cleartext"// might be "password-encrypted" (default if omitted)
 		}
 	},
 
@@ -233,14 +240,14 @@ exports.services = {
 
 	imap: {
 		disabled: false,                        // this property is optional
-		hostname: 'your.imap.fqdn.here',
+		hostname: "your.imap.fqdn.here",
 		port: 143,
-		socketType: 'STARTTLS',                 // might be "plain"
+		socketType: "STARTTLS",                 // might be "plain"
 		ms: {
 			spa: false                          // set true for enabling SPA
 		},
 		mozilla: {
-			authentication: 'password-cleartext'// might be "password-encrypted" (default if omitted)
+			authentication: "password-cleartext"// might be "password-encrypted" (default if omitted)
 		}
 	},
 
@@ -252,14 +259,14 @@ exports.services = {
 
 	pop3s: {
 		disabled: false,                        // this property is optional
-		hostname: 'your.pop3s.fqdn.here',
+		hostname: "your.pop3s.fqdn.here",
 		port: 995,
-		socketType: 'SSL',
+		socketType: "SSL",
 		ms: {
 			spa: false                          // set true for enabling SPA
 		},
 		mozilla: {
-			authentication: 'password-cleartext'// might be "password-encrypted" (default if omitted)
+			authentication: "password-cleartext"// might be "password-encrypted" (default if omitted)
 		}
 	},
 
@@ -275,14 +282,14 @@ exports.services = {
 
 	pop3: {
 		disabled: false,                        // this property is optional
-		hostname: 'your.pop3.fqdn.here',
+		hostname: "your.pop3.fqdn.here",
 		port: 110,
-		socketType: 'STARTTLS',                 // might be "plain"
+		socketType: "STARTTLS",                 // might be "plain"
 		ms: {
 			spa: false                          // set true for enabling SPA
 		},
 		mozilla: {
-			authentication: 'password-cleartext'// might be "password-encrypted" (default if omitted)
+			authentication: "password-cleartext"// might be "password-encrypted" (default if omitted)
 		}
 	},
 
@@ -294,14 +301,14 @@ exports.services = {
 
 	smtps: {
 		disabled: false,                        // this property is optional
-		hostname: 'your.smtps.fqdn.here',
+		hostname: "your.smtps.fqdn.here",
 		port: 465,
-		socketType: 'SSL',
+		socketType: "SSL",
 		ms: {
 			spa: false                          // set true for enabling SPA
 		},
 		mozilla: {
-			authentication: 'password-cleartext'// might be "password-encrypted" (default if omitted)
+			authentication: "password-cleartext"// might be "password-encrypted" (default if omitted)
 		}
 	},
 
@@ -317,14 +324,14 @@ exports.services = {
 
 	smtp: {
 		disabled: false,                        // this property is optional
-		hostname: 'your.smtp.fqdn.here',
+		hostname: "your.smtp.fqdn.here",
 		port: 25,
-		socketType: 'STARTTLS',                 // might be "plain"
+		socketType: "STARTTLS",                 // might be "plain"
 		ms: {
 			spa: false                          // set true for enabling SPA
 		},
 		mozilla: {
-			authentication: 'password-cleartext'// might be "password-encrypted" (default if omitted)
+			authentication: "password-cleartext"// might be "password-encrypted" (default if omitted)
 		}
 	}
 };
