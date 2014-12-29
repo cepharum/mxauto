@@ -31,13 +31,21 @@ var EXPRESS = require( 'express' );
 var PATH = require( 'path' );
 var FAVICON = require( 'serve-favicon' );
 var LOGGER = require( 'morgan' );
-var COOKIE_PARSER = require( 'cookie-parser' );
-var BODY_PARSER = require( 'body-parser' );
+
+var WEBUI = require( './routes/webui' );
+var MOZILLA = require( './routes/mozilla' );
+var MS = require( './routes/ms' );
+
 
 var QUERY_RESOLVER = require( './resolvers/ldap' );
 
-var WEBUI = require( './routes/webui' );
-var MAIL = require( './routes/mail' );
+function setResolver( req, res, next ) {
+	req.resolver = QUERY_RESOLVER.resolver;
+
+	next();
+}
+
+
 
 var app = EXPRESS();
 
@@ -47,18 +55,15 @@ app.set( 'view engine', 'jade' );
 
 app.use( FAVICON( __dirname + '/public/images/favicon.png' ) );
 app.use( LOGGER( 'dev' ) );
-app.use( BODY_PARSER.json() );
-app.use( BODY_PARSER.urlencoded( { extended: false } ) );
-app.use( COOKIE_PARSER() );
 app.use( EXPRESS.static( PATH.join( __dirname, 'public' ) ) );
 
 app.use( '/', WEBUI );
-app.use( '/mail', function( req, res, next ) {
-	req.resolver = QUERY_RESOLVER.resolver;
 
-	next();
-} );
-app.use( '/mail', MAIL );
+app.use( '/mail', setResolver );
+app.use( '/mail', MOZILLA );
+
+app.use( '/autodiscover', setResolver );
+app.use( '/autodiscover', MS );
 
 // catch 404 and forward to error handler
 app.use( function ( req, res, next ) {

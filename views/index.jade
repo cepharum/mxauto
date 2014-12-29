@@ -8,6 +8,22 @@ block content
 		client software on setting it up for accessing your mail boxes. Most
 		likely this page isn't what you are looking for.
 	p
-		| Found out more on
-		a(href="http://cepharum.de") cepharum.de
+		| Ask
+		= " "
+		if config.services && config.services.ms && config.services.ms.serviceHomeUrl
+			a(href=config.services.ms.serviceHomeUrl) your ISP
+		else
+			| your ISP
+		= " "
+		| for support if you don't know how to set up your mail accounts!
+	p
+		| Find out more about this software on
+		= ' '
+		a(href="http://github.com/cepharum/mxauto") GitHub
 		| !
+
+	p#footer
+		em
+			| &copy;
+			= ' ' + new Date().getFullYear() + ', '
+			a(href="http://cepharum.de") cepharum GmbH

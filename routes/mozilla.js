@@ -27,24 +27,14 @@
  */
 
 
-var EXPRESS = require( 'express' ),
-	CONFIG = require( '../config' ),
-	router = EXPRESS.Router();
+var EXPRESS = require( "express" ),
+	CONFIG  = require( "../config" ),
+	CLONE   = require( "../lib/clone" ),
+	RESOLVE = require( "../lib/resolve/mail2login" ),
+	router  = EXPRESS.Router();
 
 
-function _clone( object ) {
-	return Object.keys( object ).reduce( function ( obj, item ) {
-		var source = object[item];
 
-		if ( typeof source === "object" ) {
-			obj[item] = _clone( source );
-		} else {
-			obj[item] = source;
-		}
-
-		return obj;
-	}, {} );
-}
 
 router.get( '/', function ( req, res, next ) {
 	var error = new Error( "invalid request" );
@@ -53,43 +43,20 @@ router.get( '/', function ( req, res, next ) {
 } );
 
 router.get( '/config-v1.1.xml', function ( req, res, next ) {
-	var error, email = req.query.emailaddress;
+	var email = req.query.emailaddress;
 
-	if ( !email ) {
-		console.log( "missing mail address" );
+	RESOLVE.mail2login( req.resolver, email, function( error, loginName ) {
+		if ( error ) {
+			next( error );
+		} else {
+			console.log( email + " -> " + loginName + " (mozilla)" );
 
-		error = new Error( "invalid mail address" );
-		error.status = 500;
-		next( error );
-	} else if ( !/^[^\s@]+@([^.]+\.)+[^.]{2,}$/.test( email ) ) {
-		console.log( "invalid mail address: " + String( email ).substr( 0, 128 ) );
+			var config = CLONE.clone( CONFIG.services );
+			config.username = loginName;
 
-		error = new Error( "invalid mail address" );
-		error.status = 500;
-		next( error );
-	} else {
-		var config = _clone( CONFIG.services );
-
-		req.resolver.query( email, function( error, match ) {
-			if ( error ) {
-				error.status = 500;
-				next( error );
-			} else if ( match ) {
-				console.log( email + " -> " + match.username + " (mozilla)" );
-
-				config.username = match.username;
-
-				res.type( "xml" ).render( "xml-mozilla", config );
-			} else {
-				error = new Error( "no such account" );
-				error.status = 404;
-
-				setTimeout( function() {
-					next( error );
-				}, 1000 );
-			}
-		} );
-	}
+			res.type( "xml" ).render( "xml-mozilla", config );
+		}
+	} );
 } );
 
 module.exports = router;

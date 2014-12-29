@@ -54,6 +54,8 @@ LdapResolver.prototype._bind = function( callback ) {
 				// on error -> revert semaphore on having bound with LDAP
 				that._bound = null;
 
+				console.error( "LDAP bind error: " + error.message );
+
 				// indicate error to caller-provided callback
 				callback( error, false );
 			} else {

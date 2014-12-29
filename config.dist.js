@@ -27,6 +27,36 @@
  */
 
 
+
+
+/**
+ * Configures https service required for properly serving MS-style clients like
+ * Outlook.
+ *
+ * @type {{keyFile: string, certFile: string}}
+ */
+
+exports.ssl = {
+
+	/**
+	 * Defines pathname of file to read private key for encrypting https from.
+	 *
+	 * @type {string}
+	 */
+
+	keyFile: "/pathname/to/your/SSL/private/key.file",
+
+	/**
+	 * Defines pathname of file to read private key for encrypting https from.
+	 *
+	 * @type {string}
+	 */
+
+	certFile: "/pathname/to/your/SSL/public/certificate.file"
+};
+
+
+
 /**
  * Configures resolvers retrieving login name of mailbox associated with mail
  * address contained in request.
@@ -187,7 +217,32 @@ exports.services = {
 		 * @type {?string}
 		 */
 
-		serviceHomeUrl: null
+		serviceHomeUrl: null,
+
+		/**
+		 * Defines URL of autoconfiguration service clients are redirected to
+		 * after trying a customer's autodiscover.customer-domain.com didn't
+		 * work.
+		 *
+		 * @note Actually, this should point to the URL given as example here
+		 *       but might redirect user's of a customer's domain to using your
+		 *       more generic domain, thus statically redirecting from
+		 *
+		 *           autodiscover.foo.com
+		 *
+		 *       to
+		 *
+		 *           https://autodiscover.ispdomain.com%p
+		 *
+		 * @note This URL might contain markers to be replaced like this:
+		 *       * %h is replaced by domain name of current request w/o any leading "autodiscover."
+		 *       * %p is replaced by pathname of server-side script
+		 *
+		 * @note Unless you do some aliasing or rewriting you should append your
+		 *       URL with %p here for adding the common /autodiscover/...
+		 */
+
+		basicServiceUrl: "https://autodiscover.your-isp-domain.here%p"
 	},
 
 

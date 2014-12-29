@@ -5,22 +5,24 @@ mixin incoming(type, opt)
 		hostname= opt.hostname
 		port= opt.port
 		socketType= opt.socketType
-		authentication= opt.authentication
+		authentication= opt.mozilla && opt.mozilla.authentication || "password-encrypted"
 		username= attributes.username
 
 mixin outgoing(opt)
-	ougoingServer(type='smtp')
+	outgoingServer(type='smtp')
 		hostname= opt.hostname
 		port= opt.port
 		socketType= opt.socketType
-		authentication= opt.authentication
+		authentication= opt.mozilla && opt.mozilla.authentication || "password-encrypted"
 		username= attributes.username
 
 clientConfig
-	emailProvider(id=emailProviderId)
-		domain= domain
-		displayName= displayName
-		displayShortName= displayShortName
+	emailProvider(id=mozilla.emailProviderId)
+		each domainName in Array.isArray( mozilla.domain ) ? mozilla.domain : mozilla.domain ? [ mozilla.domain ] : []
+			domain= domainName
+
+		displayName= mozilla.displayName
+		displayShortName= mozilla.displayShortName
 
 		if imaps && !imaps.disabled
 			+incoming('imap', imaps)(username=username)

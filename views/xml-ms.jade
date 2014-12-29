@@ -1,0 +1,39 @@
+//- @see http://msdn.microsoft.com/en-us/library/dn292971%28v=exchg.80%29.aspx
+
+doctype xml
+
+mixin service(type, opt)
+	Protocol
+		Type= String( type ).toUpperCase()
+		Server= opt.hostname
+		Port= opt.port
+		LoginName= attributes.username
+		DomainRequired off
+		SPA= opt.ms && opt.ms.spa ? "on" : "off"
+		SSL= opt.socketType === "SSL" ? "on" : "off"
+		AuthRequired on
+
+Autodiscover(xmlns="http://schemas.microsoft.com/exchange/autodiscover/responseschema/2006")
+	Response(xmlns=String( request.Autodiscover.Request[0].AcceptableResponseSchema[0] ))
+		Account
+			AccountType email
+			Action settings
+
+			if ms.imageUrl
+				Image= ms.imageUrl
+			if ms.serviceHome
+				ServiceHome= ms.serviceHome
+
+			if imaps && !imaps.disabled
+				+service('imap', imaps)(username=username)
+			if imap && !imap.disabled
+				+service('imap', imap)(username=username)
+			if pop3s && !pop3s.disabled
+				+service('pop3', pop3s)(username=username)
+			if pop3 && !pop3.disabled
+				+service('pop3', pop3)(username=username)
+
+			if smtps && !smtps.disabled
+				+service('smtp',smtps)(username=username)
+			if smtp && !smtp.disabled
+				+service('smtp',smtp)(username=username)
