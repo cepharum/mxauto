@@ -1,0 +1,37 @@
+//- Provides some information on how to use this service with Outlook.
+
+extends ../layout
+
+block content
+	h1
+		span= title
+	p.
+		Recent releases of Outlook support automatic configuration of mail
+		accounts. Basically you start it by adding new mail account to Outlook,
+		entering
+	ol
+		li your name,
+		li your mail address and
+		li the password for accessing mailbox.
+	p.
+		Outlook is then interacting with this web service for getting all
+		additionally required configuration options.
+
+	h2
+		span Further Information
+	p
+		| You might ask
+		= " "
+		if config.services && config.services.ms && config.services.ms.serviceHomeUrl
+			a(href=config.services.ms.serviceHomeUrl) your ISP
+		else
+			| your ISP
+		= " "
+		| for support if you still don't know how to set up your mail account or
+		| if your version of Outlook isn't supporting automatic configuration.
+
+	p#footer
+		em
+			| &copy;
+			= ' ' + new Date().getFullYear() + ', '
+			a(href="http://cepharum.de") cepharum GmbH

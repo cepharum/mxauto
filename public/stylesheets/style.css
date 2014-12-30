@@ -22,9 +22,12 @@ h1 span, h2 span {
 	width: 920px;
 	margin: auto;
 	padding: 0 20px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
-p, pre {
+p, pre, table, ol, ul, form {
 	width: 920px;
 	margin: 1em auto;
 	padding: 0 20px;
@@ -40,4 +43,103 @@ p#footer {
 
 p#footer em {
 	font-style: normal;
+}
+
+pre {
+	overflow: auto;
+}
+
+ol li, ul li {
+	margin-left: 30px;
+}
+
+.row, .row > label, .row > div {
+	position: relative;
+	overflow: hidden;
+}
+
+.row + .row {
+	margin-top: 0.5em;
+}
+
+.row > label {
+	float: left;
+	width: 200px;
+	margin-right: 20px;
+	text-align: right;
+}
+
+.row input[type=text] {
+	display: inline-block;
+	width: 400px;
+}
+
+.row .selector > span {
+	display: inline;
+}
+
+.row .selector > span + span {
+	margin-left: 2em;
+}
+
+.row .selector > label {
+	display: table-row;
+}
+
+.row div > label {
+	display: block;
+	color: #888;
+	font: normal 12px/20px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+.submit > div {
+	margin-left: 220px;
+}
+
+
+@media (max-width:767px) {
+	h2 {
+		margin: 2em 0 0.5em 0;
+	}
+
+	h1 span, h2 span {
+		width: auto;
+		margin: 0;
+		white-space: normal;
+		line-height: 50px;
+	}
+
+	h1 span {
+		padding: 20px;
+	}
+
+	p, pre, table, ol, ul, form {
+		width: auto;
+		margin: 1em 0;
+	}
+
+	.row, .row > label, .row > div {
+		position: relative;
+		overflow: hidden;
+	}
+
+	.row + .row {
+		margin-top: 20px;
+	}
+
+	.row > label {
+		float: none;
+		display: block;
+		font-weight: bold;
+		text-align: left;
+	}
+
+	.row input[type=text] {
+		display: block;
+		width: calc( 100% - 2em );
+	}
+
+	.submit > div {
+		margin-left: 0;
+	}
 }

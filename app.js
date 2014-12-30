@@ -35,15 +35,7 @@ var LOGGER = require( 'morgan' );
 var WEBUI = require( './routes/webui' );
 var MOZILLA = require( './routes/mozilla' );
 var MS = require( './routes/ms' );
-
-
 var QUERY_RESOLVER = require( './resolvers/ldap' );
-
-function setResolver( req, res, next ) {
-	req.resolver = QUERY_RESOLVER.resolver;
-
-	next();
-}
 
 
 
@@ -57,12 +49,13 @@ app.use( FAVICON( __dirname + '/public/images/favicon.png' ) );
 app.use( LOGGER( 'dev' ) );
 app.use( EXPRESS.static( PATH.join( __dirname, 'public' ) ) );
 
+app.use( function( req, res, next ) {
+	req.resolver = QUERY_RESOLVER.resolver;
+	next();
+} );
+
 app.use( '/', WEBUI );
-
-app.use( '/mail', setResolver );
 app.use( '/mail', MOZILLA );
-
-app.use( '/autodiscover', setResolver );
 app.use( '/autodiscover', MS );
 
 // catch 404 and forward to error handler

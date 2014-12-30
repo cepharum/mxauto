@@ -27,6 +27,19 @@
  */
 
 
+/**
+ * Defines URL to use for addressing this service over HTTPS.
+ *
+ * This is used with
+ * 1. redirecting MS-style clients to use your properly certified HTTPS after
+ *    trying a customer's domain just aliasing this service
+ * 2. generating configuration profiles for use with Apple devices.
+ *
+ * @type {string}
+ */
+
+exports.secureBaseUrl = "https://mxauto.your.isp.domain";
+
 
 
 /**
@@ -217,32 +230,38 @@ exports.services = {
 		 * @type {?string}
 		 */
 
-		serviceHomeUrl: null,
+		serviceHomeUrl: null
+	},
+
+
+	/**
+	 * Provides common settings of all services configured below but specific to
+	 * Apple-style clients (MacOS Mail, iOS Mail).
+	 *
+	 * @see https://developer.apple.com/library/ios/featuredarticles/iPhoneConfigurationProfileRef/Introduction/Introduction.html
+	 */
+
+	apple: {
 
 		/**
-		 * Defines URL of autoconfiguration service clients are redirected to
-		 * after trying a customer's autodiscover.customer-domain.com didn't
-		 * work.
+		 * Provides information for Apple-specific plist entry PayloadOrganization:
 		 *
-		 * @note Actually, this should point to the URL given as example here
-		 *       but might redirect user's of a customer's domain to using your
-		 *       more generic domain, thus statically redirecting from
+		 * "A human-readable string containing the name of the organization that
+		 * provided the profile."
 		 *
-		 *           autodiscover.foo.com
-		 *
-		 *       to
-		 *
-		 *           https://autodiscover.ispdomain.com%p
-		 *
-		 * @note This URL might contain markers to be replaced like this:
-		 *       * %h is replaced by domain name of current request w/o any leading "autodiscover."
-		 *       * %p is replaced by pathname of server-side script
-		 *
-		 * @note Unless you do some aliasing or rewriting you should append your
-		 *       URL with %p here for adding the common /autodiscover/...
+		 * @type {string}
 		 */
 
-		basicServiceUrl: "https://autodiscover.your-isp-domain.here%p"
+		organizationName: "your-ISP-name-here",
+
+		/**
+		 * Marks if account might require different passwords for incoming and
+		 * outgoing servers (though providing same username in either case).
+		 *
+		 * @type {boolean}
+		 */
+
+		differentPasswords: false
 	},
 
 

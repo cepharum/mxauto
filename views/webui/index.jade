@@ -1,12 +1,32 @@
-extends layout
+extends ../layout
 
 block content
 	h1
 		span= title
 	p.
 		This is the MX autoconfiguration service for use with your personal mail
-		client software on setting it up for accessing your mail boxes. Most
-		likely this page isn't what you are looking for.
+		client software on setting it up for accessing your mail boxes. Select
+		the client you like to configure:
+	table
+		thead
+			tr
+				th Client
+				th Information
+		tbody
+			tr
+				td Outlook
+				td
+					a(href="ms") How to use Autodiscovery with MS Outlook?
+			tr
+				td Thunderbird
+				td
+					a(href="mozilla") How to use Autoconfiguration with Thundebird?
+			tr
+				td iPhone / iPad / Mac
+				td
+					a(href=config.secureBaseUrl + "/apple") Generate configuration profile
+	h2
+		span Further Information
 	p
 		| Ask
 		= " "

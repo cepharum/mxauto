@@ -60,6 +60,7 @@ router.post( '/autodiscover.xml', BODY.text( { type: "text/*" } ), function ( re
 
 						var config = CLONE.clone( CONFIG.services );
 						config.username = loginName;
+						config.email    = email;
 
 						// MS-special: grant access on request message
 						config.request = xml;
@@ -73,15 +74,7 @@ router.post( '/autodiscover.xml', BODY.text( { type: "text/*" } ), function ( re
 } );
 
 router.get( "/autodiscover.xml", function( req, res, next ) {
-	var redirectedUrl = CONFIG.services.ms.basicServiceUrl.replace( /%[hp]/g, function( marker ) {
-		switch ( marker ) {
-			case "%h" :
-				return req.hostname.replace( /^autodiscover\./, "" );
-
-			case "%p" :
-				return "/autodiscover/autodiscover.xml";
-		}
-	} );
+	var redirectedUrl = CONFIG.secureBaseUrl.replace( /[\s\/]+$/, "" ) + "/autodiscover/autodiscover.xml";
 
 	console.log( "WARNING: client rejected response on initial request -> trying to redirect client to " + redirectedUrl );
 

@@ -2,7 +2,10 @@ extends layout
 
 block content
 	h1
-		span= message
-	h2
-		span= error.status
-	pre #{error.stack}
+		span(title=message)= message
+	if error.description
+		p= error.description
+	else
+		h2
+			span= error.status
+		pre #{error.stack}

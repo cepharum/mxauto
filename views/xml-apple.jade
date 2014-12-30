@@ -1,0 +1,79 @@
+doctype xml
+doctype plist PUBLIC "-//Apple Inc//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"
+
+plist(version="1.0")
+	dict
+		key PayloadVersion
+		integer 1
+		key PayloadType
+		string Configuration
+		key PayloadUUID
+		string= uuids.shift()
+		key PayloadScope
+		string User
+		key PayloadIdentifier
+		string= apple.identifier
+		key PayloadContent
+		array
+			dict
+				key PayloadVersion
+				integer 1
+				key PayloadType
+				string com.apple.mail.managed
+				key PayloadUUID
+				string= uuids.shift()
+				key PayloadIdentifier
+				string= apple.identifier
+				if apple.organizationName
+					key PayloadOrganization
+					string apple.organizationName
+					key PayloadDisplayName
+					string= apple.organizationName + " E-Mail configuration"
+				else
+					key PayloadDisplayName
+					string= "Automated E-Mail configuration"
+				key PayloadDescription
+				string= "Provides configuration for accessing mailbox of " + apple.email + "."
+				key EmailAccountDescription
+				string= email
+				key EmailAccountName
+				string= fullname
+				key EmailAccountType
+				string= incoming.isIMAP ? "EmailTypeIMAP" : "EmailTypePOP"
+				key EmailAddress
+				string= email
+
+				key IncomingMailServerAuthentication
+				string EmailAuthPassword
+				key IncomingMailServerHostName
+				string= incoming.hostname
+				if incoming.port
+					key IncomingMailServerPortNumber
+					integer= incoming.port
+				key IncomingMailServerUseSSL
+				if String( incoming.socketType ).toUpperCase() === "SSL"
+					true
+				else
+					false
+				key IncomingMailServerUsername
+				string= username
+
+				key OutgoingMailServerAuthentication
+				string EmailAuthPassword
+				key OutgoingMailServerHostName
+				string= outgoing.hostname
+				if outgoing.port
+					key OutgoingMailServerPortNumber
+					integer= outgoing.port
+				key OutgoingMailServerUseSSL
+				if String( outgoing.socketType ).toUpperCase() === "SSL"
+					true
+				else
+					false
+				key OutgoingMailServerUsername
+				string= username
+				key OutgoingPasswordSameAsIncomingPassword
+				if apple.differentPasswords
+					false
+				else
+					true

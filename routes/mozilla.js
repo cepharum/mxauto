@@ -53,6 +53,7 @@ router.get( '/config-v1.1.xml', function ( req, res, next ) {
 
 			var config = CLONE.clone( CONFIG.services );
 			config.username = loginName;
+			config.email    = email;
 
 			res.type( "xml" ).render( "xml-mozilla", config );
 		}
