@@ -19,7 +19,6 @@ h2 {
 
 h1 span, h2 span {
 	display: block;
-	width: 920px;
 	margin: auto;
 	padding: 0 20px;
 	white-space: nowrap;
@@ -28,7 +27,6 @@ h1 span, h2 span {
 }
 
 p, pre, table, ol, ul, form {
-	width: 920px;
 	margin: 1em auto;
 	padding: 0 20px;
 }
@@ -50,7 +48,7 @@ pre {
 }
 
 ol li, ul li {
-	margin-left: 30px;
+	margin-left: 2em;
 }
 
 .row, .row > label, .row > div {
@@ -63,15 +61,8 @@ ol li, ul li {
 }
 
 .row > label {
-	float: left;
-	width: 200px;
 	margin-right: 20px;
 	text-align: right;
-}
-
-.row input[type=text] {
-	display: inline-block;
-	width: 400px;
 }
 
 .row .selector > span {
@@ -97,16 +88,44 @@ ol li, ul li {
 }
 
 
-@media (max-width:767px) {
+
+
+@media (min-device-width:481px) {
+	h1 span, h2 span {
+		width: 920px;
+	}
+
+	p, pre, table, ol, ul, form {
+		width: 920px;
+	}
+
+	.row input[type=text] {
+		display: inline-block;
+		width: 400px;
+	}
+
+	.row > label {
+		float: left;
+		width: 200px;
+	}
+}
+
+@media (max-device-width:480px) {
+	body, input[type=text], input[type=checkbox], button {
+		font: normal 16px/28px "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+	}
+
+	h1 {
+		font: normal 30px/42px "Lucida Grande", Helvetica, Arial, sans-serif;
+	}
+
 	h2 {
 		margin: 2em 0 0.5em 0;
 	}
 
 	h1 span, h2 span {
-		width: auto;
 		margin: 0;
 		white-space: normal;
-		line-height: 50px;
 	}
 
 	h1 span {
@@ -114,8 +133,11 @@ ol li, ul li {
 	}
 
 	p, pre, table, ol, ul, form {
-		width: auto;
 		margin: 1em 0;
+	}
+
+	table {
+		border-spacing: 20px;
 	}
 
 	.row, .row > label, .row > div {
@@ -128,7 +150,6 @@ ol li, ul li {
 	}
 
 	.row > label {
-		float: none;
 		display: block;
 		font-weight: bold;
 		text-align: left;
