@@ -5,11 +5,9 @@ A Standalone MX Autoconfiguration Service
 
 ## License
 
-(c) 2014 cepharum GmbH, Berlin, http://cepharum.de
-
 The MIT License (MIT)
 
-Copyright (c) 2014 cepharum GmbH
+Copyright (c) 2014 cepharum GmbH, Berlin, http://cepharum.de
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -32,7 +30,7 @@ SOFTWARE.
 ## About
 
 This tool has been developed to provide service similar to [automx](http://automx.org). In opposition to that **mxauto** is a standalone application not requiring to setup separate web server to forward incoming requests to the application. By relying on [nodejs](http://nodejs.org)
-**mxauto** benefits from the former's highly scalable high performance. It runs very well on small-size virtual servers (for running single process consuming ~600GB of memory).
+**mxauto** benefits from the former's highly scalable high performance. It runs very well on small-size virtual servers (for running single process consuming ~120MB of memory).
 
 ### Pros
 
