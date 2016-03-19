@@ -1,0 +1,161 @@
+body {
+	padding: 0;
+	margin: 0;
+	font: normal 16px/28px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+h1 {
+	margin: 0;
+	background: #005d91;
+	color: white;
+	font: bold 32px/100px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+h2 {
+	margin: 2em 0 1em 0;
+	color: #005d91;
+	font: bold 26px/40px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+h1 span, h2 span {
+	display: block;
+	margin: auto;
+	padding: 0 20px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+p, pre, table, ol, ul, form {
+	margin: 1em auto;
+	padding: 0 20px;
+}
+
+p#footer {
+	margin-top: 2em;
+	border-top: 1px dotted #005d91;
+	padding-top: 1em;
+	font: normal 12px/20px "Lucida Grande", Helvetica, Arial, sans-serif;
+	text-align: center;
+}
+
+p#footer em {
+	font-style: normal;
+}
+
+pre {
+	overflow: auto;
+}
+
+ol li, ul li {
+	margin-left: 2em;
+}
+
+.row, .row > label, .row > div {
+	position: relative;
+	overflow: hidden;
+}
+
+.row + .row {
+	margin-top: 0.5em;
+}
+
+.row .selector > span {
+	display: inline;
+}
+
+.row .selector > span + span {
+	margin-left: 2em;
+}
+
+.row .selector > label {
+	display: table-row;
+}
+
+.row div > label {
+	display: block;
+	color: #888;
+	font: normal 12px/20px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+
+
+@media (min-device-width:481px) {
+	h1 span, h2 span {
+		width: 920px;
+	}
+
+	p, pre, table, ol, ul, form {
+		width: 920px;
+	}
+
+	.row input[type=text] {
+		display: inline-block;
+		width: 400px;
+	}
+
+	.row > label {
+		float: left;
+		width: 200px;
+		margin-right: 20px;
+		text-align: right;
+	}
+
+	.submit > div {
+		margin-left: 220px;
+	}
+}
+
+@media (max-device-width:480px) {
+	body, input[type=text], input[type=checkbox], button {
+		font: normal 16px/28px "Lucida Grande", Helvetica, Arial, Verdana, sans-serif;
+	}
+
+	h1 {
+		font: normal 30px/42px "Lucida Grande", Helvetica, Arial, sans-serif;
+	}
+
+	h2 {
+		margin: 2em 0 0.5em 0;
+	}
+
+	h1 span, h2 span {
+		margin: 0;
+		white-space: normal;
+	}
+
+	h1 span {
+		padding: 20px;
+	}
+
+	p, pre, table, ol, ul, form {
+		margin: 1em 0;
+	}
+
+	table {
+		border-spacing: 20px;
+	}
+
+	.row, .row > label, .row > div {
+		position: relative;
+		overflow: hidden;
+	}
+
+	.row + .row {
+		margin-top: 20px;
+	}
+
+	.row > label {
+		display: block;
+		font-weight: bold;
+	}
+
+	.row input[type=text] {
+		display: block;
+		width: calc( 100% - 2em );
+	}
+
+	.submit > div {
+		margin-left: 0;
+	}
+}

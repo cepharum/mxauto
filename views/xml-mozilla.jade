@@ -1,0 +1,39 @@
+doctype xml
+
+mixin incoming(type, opt)
+	incomingServer(type=type)
+		hostname= opt.hostname
+		port= opt.port
+		socketType= opt.socketType
+		authentication= opt.mozilla && opt.mozilla.authentication || "password-encrypted"
+		username= attributes.username
+
+mixin outgoing(opt)
+	outgoingServer(type='smtp')
+		hostname= opt.hostname
+		port= opt.port
+		socketType= opt.socketType
+		authentication= opt.mozilla && opt.mozilla.authentication || "password-encrypted"
+		username= attributes.username
+
+clientConfig
+	emailProvider(id=mozilla.emailProviderId)
+		each domainName in Array.isArray( mozilla.domain ) ? mozilla.domain : mozilla.domain ? [ mozilla.domain ] : []
+			domain= domainName
+
+		displayName= mozilla.displayName
+		displayShortName= mozilla.displayShortName
+
+		if imaps && !imaps.disabled
+			+incoming('imap', imaps)(username=username)
+		if imap && !imap.disabled
+			+incoming('imap', imap)(username=username)
+		if pop3s && !pop3s.disabled
+			+incoming('pop3', pop3s)(username=username)
+		if pop3 && !pop3.disabled
+			+incoming('pop3', pop3)(username=username)
+
+		if smtps && !smtps.disabled
+			+outgoing(smtps)(username=username)
+		if smtp && !smtp.disabled
+			+outgoing(smtp)(username=username)

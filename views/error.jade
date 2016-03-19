@@ -1,0 +1,11 @@
+extends layout
+
+block content
+	h1
+		span(title=message)= message
+	if error.description
+		p= error.description
+	else
+		h2
+			span= error.status
+		pre #{error.stack}

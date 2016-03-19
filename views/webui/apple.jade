@@ -1,0 +1,50 @@
+extends ../layout
+
+block content
+	h1
+		span= title
+	p.
+		Please fill in required information for generating configuration profile
+		setting up mail account on your iOS or MacOS device.
+
+	form(method="POST" action="/apple.mobileconfig")
+		div.row
+			label Your Full Name:
+			div
+				input(type="text" name="fullname" required)
+				label This information will be used for describing you on sending mails.
+		div.row
+			label Your E-Mail Address:
+			div
+				input(type="text" name="emailaddress" required)
+		div.row
+			label Type of Mailbox:
+			div.selector
+				span
+					input(type="radio" name="imap" id="imap_yes" value="1" checked)
+					label(for="imap_yes")= " IMAP"
+				span
+					input(type="radio" name="imap" id="imap_no" value="0")
+					label(for="imap_no")= " POP3"
+				label Choose IMAP to have mails reside on server for sharing access among multiple devices, though resulting in higher network traffic!
+		div.row.submit
+			div
+				button(type="submit") Generate Configuration Profile
+
+	h2
+		span Further Information
+	p
+		| You might ask
+		= " "
+		if config.services && config.services.ms && config.services.ms.serviceHomeUrl
+			a(href=config.services.ms.serviceHomeUrl) your ISP
+		else
+			| your ISP
+		= " "
+		| for support if setting up your iOS or MacOS device failed.
+
+	p#footer
+		em
+			| &copy;
+			= ' ' + new Date().getFullYear() + ', '
+			a(href="http://cepharum.de") cepharum GmbH
