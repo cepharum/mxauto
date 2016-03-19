@@ -30,5 +30,6 @@ build/Release
 node_modules
 
 
-**/*.ce?rt
+**/*.cert
+**/*.crt
 **/*.key
