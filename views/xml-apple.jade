@@ -1,6 +1,17 @@
 doctype xml
 doctype plist PUBLIC "-//Apple Inc//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"
 
+mixin plistLabel(context)
+	if context.organizationName
+		key PayloadOrganization
+		string context.organizationName
+		key PayloadDisplayName
+		string= context.organizationName + " E-Mail configuration for " + email
+	else
+		key PayloadDisplayName
+		string= "E-Mail configuration for " + email
+
+
 plist(version="1.0")
 	dict
 		key PayloadVersion
@@ -13,6 +24,7 @@ plist(version="1.0")
 		string User
 		key PayloadIdentifier
 		string= apple.identifier
+		+plistLabel(apple)
 		key PayloadContent
 		array
 			dict
@@ -24,14 +36,7 @@ plist(version="1.0")
 				string= uuids.shift()
 				key PayloadIdentifier
 				string= apple.identifier
-				if apple.organizationName
-					key PayloadOrganization
-					string apple.organizationName
-					key PayloadDisplayName
-					string= apple.organizationName + " E-Mail configuration"
-				else
-					key PayloadDisplayName
-					string= "Automated E-Mail configuration"
+				+plistLabel(apple)
 				key PayloadDescription
 				string= "Provides configuration for accessing mailbox of " + apple.email + "."
 				key EmailAccountDescription
