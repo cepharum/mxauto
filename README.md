@@ -126,3 +126,7 @@ Consider users like `johndoe` with mail address `johndoe@example.com`. In this c
 > Subdomain `autoconfig` will be used by Thunderbird for autoconfiguration. `autodiscover` is the counterpart used by Outlook.
 
 Of course it's possible to add even more subdomains pointing to that server, primarily for simplifying use of provided web UI. On adding subdomain `setup.example.com` users in that domain might open `http://setup.example.com` for accessing web UI of **mxauto** what is required for generating configuration profiles supporting setup of mail accounts in recent versions of Mac OS X and iOS.
+
+## Background Information
+
+* https://developer.apple.com/library/ios/featuredarticles/iPhoneConfigurationProfileRef/Introduction/Introduction.html
